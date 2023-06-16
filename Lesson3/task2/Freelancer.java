@@ -3,7 +3,7 @@ package Lesson3.task2;
 
 
 /**
- * TODO: Спроектировать класс Freelancer самостоятельно в рамках домашнего задания
+ * Спроектировать класс Freelancer самостоятельно в рамках домашнего задания
  */
 public class Freelancer extends Employee {
 
