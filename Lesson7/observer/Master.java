@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Master implements Observer {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    private String name;
+    private final String name;
 
     private double minSalary;
 
@@ -16,15 +16,14 @@ public class Master implements Observer {
     }
 
     @Override
-    public void receiveOffer(String companyName, double salary) {
-        if (minSalary <= salary){
-            System.out.printf("Рабочий %s (%f) >>> Мне нужна эта работа! [%s - %f]\n",
-                    name, minSalary, companyName, salary);
-            minSalary = salary;
-        }
-        else {
-            System.out.printf("Рабочий %s >>> Я найду работу получше (%f)! [%s - %f]\n",
-                    name, minSalary, companyName, salary);
+    public void receiveOffer(Vacancy vacancy) {
+        if (minSalary <= vacancy.getSalary() && vacancy.getVacancyType() != VacancyType.Handyman && vacancy.getVacancyType() != VacancyType.TemporaryStaff) {
+            System.out.printf("Рабочий %s (%f) >>> Мне нужна эта работа! [%s - %f, %s]\n",
+                    name, minSalary, vacancy.getCompanyName(), vacancy.getSalary(), vacancy.getVacancyType());
+            minSalary = vacancy.getSalary();
+        } else {
+            System.out.printf("Рабочий %s >>> Я найду работу получше (%f)! [%s - %f, %s]\n",
+                    name, minSalary, vacancy.getCompanyName(), vacancy.getSalary(), vacancy.getVacancyType());
         }
     }
 }

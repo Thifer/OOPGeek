@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class Company {
 
-    private static  Random random = new Random();
-    private String companyName;
-    private  double maxSalary;
-
-    private Publisher jobAgency;
+    private static final Random random = new Random();
+    private final double maxSalary;
+    private Vacancy vacancy;
+    private final String companyName;
+    private final Publisher jobAgency;
 
 
     public Company(String companyName, double maxSalary, Publisher jobAgency) {
@@ -17,9 +17,10 @@ public class Company {
         this.jobAgency = jobAgency;
     }
 
-    public void needEmployee(){
+    public void needEmployee(VacancyType vacancyType) {
         double salary = random.nextDouble(3000, maxSalary);
-        jobAgency.sendOffer(companyName, salary);
+        vacancy = new Vacancy(companyName, vacancyType, salary);
+        jobAgency.sendOffer(vacancy);
     }
 
 
